@@ -1,29 +1,906 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
-  <title>[TEST] Gruber Sebastian - Demo</title>
-  <style>
-    body { font-family: sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; background: #fafafa; color: #222; }
-    h1 { color: #d4650d; margin-bottom: 8px; }
-    .badge { background: #fff3cd; border: 1px solid #ffc107; padding: 8px 16px; border-radius: 4px; display: inline-block; margin-bottom: 24px; font-weight: bold; font-size: 0.9rem; }
-    .info { background: #f0f0f0; padding: 16px; border-radius: 8px; margin-bottom: 16px; }
-    .info p { margin: 4px 0; }
-    footer { margin-top: 40px; color: #999; font-size: 0.8rem; border-top: 1px solid #ddd; padding-top: 12px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Gruber Sebastian – Handwerksbetrieb Traunstein</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #c41e3a;
+            --accent-dark: #a01830;
+            --accent-light: #e63946;
+            --bg-primary: #fafaf9;
+            --bg-secondary: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --border: #e5e5e5;
+            --success: #2d6a4f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            line-height: 1.6;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-32px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--accent);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-sub {
+            font-size: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .nav-cta:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(196, 30, 58, 0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 16px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+            letter-spacing: -1px;
+        }
+
+        .hero-text h1 .accent {
+            color: var(--accent);
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            min-height: 56px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(196, 30, 58, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent);
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 2px solid var(--accent);
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            min-height: 56px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent);
+            color: white;
+            transform: translateY(-4px);
+        }
+
+        .hero-visual {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 25%, #CD853F 50%, #DEB887 75%, #D2B48C 100%);
+            border-radius: 12px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            padding: 32px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+            animation: slideInRight 1s ease-out;
+        }
+
+        /* Features Section */
+        .features {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 16px;
+            background-color: var(--bg-primary);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background-color: var(--bg-secondary);
+            padding: 40px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+            border-left-width: 6px;
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background-color: rgba(196, 30, 58, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 28px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* About Section */
+        .about {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 16px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .about-visual {
+            background: linear-gradient(120deg, #704214 0%, #8B4513 25%, #A0522D 50%, #B8860B 75%, #9B8B00 100%);
+            border-radius: 12px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            padding: 32px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+            animation: slideInRight 1s ease-out 0.2s backwards;
+        }
+
+        .about-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .about-content p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .about-list {
+            list-style: none;
+            margin: 32px 0;
+        }
+
+        .about-list li {
+            padding: 12px 0;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .about-list li::before {
+            content: '✓';
+            color: var(--accent);
+            font-weight: 900;
+            margin-right: 16px;
+            font-size: 20px;
+        }
+
+        /* Contact Section */
+        .contact {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 16px;
+            background-color: var(--bg-primary);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: start;
+        }
+
+        .contact-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 900;
+            margin-bottom: 32px;
+            color: var(--text-primary);
+        }
+
+        .contact-block {
+            margin-bottom: 40px;
+        }
+
+        .contact-block h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .contact-block p {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .contact-block a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .contact-block a:hover {
+            color: var(--accent-dark);
+            text-decoration: underline;
+        }
+
+        .contact-form {
+            background-color: var(--bg-secondary);
+            padding: 48px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .contact-form h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            color: var(--text-primary);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 52px;
+        }
+
+        .form-submit:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(196, 30, 58, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-primary);
+            color: white;
+            padding: 64px 16px 32px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-section h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .footer-divider {
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 32px;
+        }
+
+        .disclaimer {
+            background-color: rgba(196, 30, 58, 0.1);
+            border-left: 4px solid var(--accent-light);
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                gap: 16px;
+            }
+
+            nav a {
+                font-size: 13px;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 48px 0;
+            }
+
+            .hero-text h1 {
+                font-size: 36px;
+            }
+
+            .hero-visual {
+                height: 300px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 48px 16px;
+            }
+
+            .about-visual {
+                height: 300px;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .section-header h2 {
+                font-size: 32px;
+            }
+
+            .about-content h2 {
+                font-size: 32px;
+            }
+
+            .contact-info h2 {
+                font-size: 32px;
+            }
+
+            .hero-text p {
+                font-size: 16px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header-container {
+                padding: 12px 16px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            nav {
+                gap: 12px;
+            }
+
+            .nav-cta {
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+
+            .hero {
+                padding: 48px 16px;
+            }
+
+            .hero-text h1 {
+                font-size: 28px;
+            }
+
+            .hero-text p {
+                font-size: 15px;
+            }
+
+            .features {
+                padding: 48px 16px;
+            }
+
+            .about {
+                padding: 48px 16px;
+            }
+
+            .contact {
+                padding: 48px 16px;
+            }
+
+            .contact-form {
+                padding: 32px;
+            }
+
+            .section-header h2 {
+                font-size: 28px;
+            }
+
+            .feature-card {
+                padding: 24px;
+            }
+
+            footer {
+                padding: 40px 16px 20px;
+            }
+
+            .footer-content {
+                gap: 24px;
+            }
+
+            .disclaimer {
+                font-size: 11px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="badge">TEST-MODUS - Kein Anthropic-Guthaben verbraucht</div>
-  <h1>Gruber Sebastian</h1>
-  <p><strong>Branche:</strong> Handwerk | <strong>Stadt:</strong> Traunstein</p>
-  <div class="info">
-    <p><strong>Score:</strong> 80/100 (Tier A)</p>
-    <p><strong>Website-Status:</strong> no_website</p>
-    <p><strong>Probleme:</strong> Keine Website, Kein klarer CTA, Kontakt schwer auffindbar</p>
-    <p><strong>Empfohlenes Angebot:</strong> Demo-Landingpage + Beratungsgespraech</p>
-  </div>
-  <footer>Demo-Konzept - nicht zur Veroeffentlichung bestimmt. | Generiert: 25.5.2026, 15:54:22</footer>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="#hero" class="logo">
+                GRUBER<br><span class="logo-sub">Sebastian</span>
+            </a>
+            <nav>
+                <a href="#leistungen">Leistungen</a>
+                <a href="#ueber-uns">Über uns</a>
+                <a href="#kontakt">Kontakt</a>
+                <button class="nav-cta" onclick="document.getElementById('kontakt').scrollIntoView({behavior: 'smooth'})">Anfrage</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-text fade-in">
+                <h1>Handwerkliche <span class="accent">Qualität</span> von Gruber Sebastian</h1>
+                <p>Zuverlässiger Partner für professionelle Handwerksleistungen in Traunstein. Wir bringen Erfahrung, Präzision und Leidenschaft in jeden Auftrag.</p>
+                <div class="hero-cta">
+                    <button class="btn-primary" onclick="document.getElementById('kontakt').scrollIntoView({behavior: 'smooth'})">Jetzt kontaktieren</button>
+                    <button class="btn-secondary" onclick="document.getElementById('leistungen').scrollIntoView({behavior: 'smooth'})">Unsere Leistungen</button>
+                </div>
+                <p style="font-size: 14px; color: var(--text-secondary); margin-top: 24px;">
+                    <strong>Standort:</strong> Hinterwelln 3, 83278 Traunstein
+                </p>
+            </div>
+            <div class="hero-visual">
+                Handwerk mit Tradition und Modernität
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="leistungen">
+        <div class="section-header">
+            <h2>Unsere Leistungen</h2>
+            <p>Professionelle Handwerksservices für Ihre Projekte</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔨</div>
+                <h3>Maßgeschneiderte Lösungen</h3>
+                <p>Jedes Projekt ist einzigartig. Wir entwickeln individuelle Lösungen, die Ihre spezifischen Anforderungen erfüllen und Ihre Erwartungen übertreffen.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Fachkompetenz & Erfahrung</h3>
+                <p>Jahrelange Erfahrung in der Handbranche. Unser Team bringt technisches Know-how und praktisches Wissen für hochwertige Ergebnisse mit.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✓</div>
+                <h3>Zuverlässigkeit Garantiert</h3>
+                <p>Pünktlichkeit, Sauberkeit und Sorgfalt sind unsere Standards. Sie können sich auf uns verlassen – vom ersten Gespräch bis zur Fertigstellung.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="ueber-uns">
+        <div class="about-visual">
+            Leidenschaft für Handwerk & Qualität
+        </div>
+        <div class="about-content">
+            <h2>Über Gruber Sebastian</h2>
+            <p>Gruber Sebastian ist Ihr zuverlässiger Handwerkspartner in Traunstein. Mit jahrelanger Erfahrung und dem Anspruch auf Perfektion in jedem Detail steht unser Betrieb für Qualität und Kundenorientierung.</p>
+            <p>Ob Sanierung, Reparatur oder Neubau – wir begleiten Ihre Projekte von der Planung bis zur Fertigstellung mit professionellem Know-how und persönlichem Engagement.</p>
+            <ul class="about-list">
+                <li>Professionelle Handwerksausführung</li>
+                <li>Individuelle Beratung & Planung</li>
+                <li>Termingerecht & zuverlässig</li>
+                <li>Faire Preisgestaltung</li>
+                <li>Kundenzufriedenheit an erster Stelle</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="kontakt">
+        <div class="contact-content">
+            <div class="contact-info">
+                <h2>Kontaktieren Sie uns</h2>
+                <div class="contact-block">
+                    <h3>Adresse</h3>
+                    <p>Hinterwelln 3<br>83278 Traunstein<br>Deutschland</p>
+                </div>
+                <div class="contact-block">
+                    <h3>Telefon</h3>
+                    <p><a href="tel:+49">Verfügbar nach Anfrage</a></p>
+                </div>
+                <div class="contact-block">
+                    <h3>Servicegebiet</h3>
+                    <p>Traunstein und Umgebung</p>
+                </div>
+                <div class="contact-block">
+                    <h3>Öffnungszeiten</h3>
+                    <p>Montag – Freitag: 08:00 – 17:00 Uhr<br>Samstag: Nach Vereinbarung</p>
+                </div>
+            </div>
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <h3>Anfrage senden</h3>
+                <div class="form-group">
+                    <label for="name">Ihr Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-Mail *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefon</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="message">Ihre Nachricht *</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="form-submit">Anfrage absenden</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Gruber Sebastian</h4>
+                <p>Professionelle Handwerksleistungen in Traunstein. Ihr zuverlässiger Partner für alle Ihre Bauprojekte.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Standort</h4>
+                <p>Hinterwelln 3<br>83278 Traunstein<br>Deutschland</p>
+            </div>
+            <div class="footer-section">
+                <h4>Navigation</h4>
+                <a href="#leistungen">Leistungen</a><br>
+                <a href="#ueber-uns">Über uns</a><br>
+                <a href="#kontakt">Kontakt</a>
+            </div>
+        </div>
+        <div class="footer-divider">
+            <div class="disclaimer">
+                <strong>⚠️ Demo-Konzept:</strong> Diese Website ist eine Demo-Landingpage und nicht zur Veröffentlichung bestimmt. Sie dient ausschließlich zu Demonstrationszwecken für das Unternehmen Gruber Sebastian.
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Gruber Sebastian. Alle Rechte vorbehalten.</p>
+                <p>Demo-Konzept – Nicht zur Veröffentlichung bestimmt</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            alert(`Vielen Dank, ${name}! Ihre Anfrage wurde registriert. Gruber Sebastian wird sich in Kürze mit Ihnen in Verbindung setzen.`);
+            event.target.reset();
+        }
+    </script>
 </body>
 </html>
